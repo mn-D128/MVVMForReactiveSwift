@@ -16,7 +16,9 @@ class Model {
     private(set) lazy var increment = Action<Void, Int, Error> { [weak self] in
         SignalProducer<Int, Error> { [weak self] (observer, _) in
             do {
-                try self?.increment(observer: observer)
+                if let value = try self?.incrementCount() {
+                    observer.send(value: value)
+                }
                 observer.sendCompleted()
             } catch {
                 observer.send(error: error)
@@ -24,8 +26,8 @@ class Model {
         }
     }
     
-    private func increment(observer: Signal<Int, Error>.Observer) throws {
-        try observer.send(value: self._count.modify {
+    private func incrementCount() throws -> Int {
+        try self._count.modify {
             if $0 == 10 {
                 throw NSError(
                     domain: "",
@@ -36,6 +38,6 @@ class Model {
                 
             $0 += 1
             return $0
-        })
+        }
     }
 }
