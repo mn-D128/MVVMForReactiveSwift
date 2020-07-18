@@ -1,0 +1,25 @@
+PODS:
+  - ReactiveCocoa (10.3.0):
+    - ReactiveSwift (~> 6.2)
+  - ReactiveSwift (6.3.0)
+  - Toast-Swift (5.0.1)
+
+DEPENDENCIES:
+  - ReactiveCocoa (~> 10.1)
+  - ReactiveSwift (~> 6.1)
+  - Toast-Swift (~> 5.0.1)
+
+SPEC REPOS:
+  trunk:
+    - ReactiveCocoa
+    - ReactiveSwift
+    - Toast-Swift
+
+SPEC CHECKSUMS:
+  ReactiveCocoa: 083ae559e6f588ce519cab412ea119b431c26a24
+  ReactiveSwift: 7937f26ec18d555e2a99352bd0a8b2817d1f042d
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+
+PODFILE CHECKSUM: d431ac9da675e6336bb189b92ad043cda547d415
+
+COCOAPODS: 1.8.4
