@@ -11,31 +11,31 @@ import ReactiveSwift
 import ReactiveCocoa
 
 class ViewModel {
-    private let inputsConnecter = InputsConnecter()
-    private let outputsConnecter = OutputsConnecter()
+    private let inputsConnector = InputsConnector()
+    private let outputsConnector = OutputsConnector()
     
     private let model = Model()
     
     init() {
         // inputs
-        self.model.increment <~ self.inputsConnecter.tapSignal
+        self.model.increment <~ self.inputsConnector.tapSignal
         // outputs
-        self.model.increment.errors.map { $0.localizedDescription }.observe(self.outputsConnecter.errorMessageObserver)
-        self.outputsConnecter.textObserver <~ self.model.count.map { String($0) }
+        self.model.increment.errors.map { $0.localizedDescription }.observe(self.outputsConnector.errorMessageObserver)
+        self.outputsConnector.textObserver <~ self.model.count.map { String($0) }
     }
 }
 
 extension ViewModel: ViewModelType {
-    var inputs: ViewModelInputs { self.inputsConnecter }
-    var outputs: ViewModelOutputs { self.outputsConnecter }
+    var inputs: ViewModelInputs { self.inputsConnector }
+    var outputs: ViewModelOutputs { self.outputsConnector }
 }
 
 private extension ViewModel {
-    class InputsConnecter {
+    class InputsConnector {
         let (tapSignal, tap) = Signal<(), Never>.pipe()
     }
 
-    class OutputsConnecter {
+    class OutputsConnector {
         let textObserver = MutableProperty<String>("")
         let text: SignalProducer<String, Never>
         
@@ -47,8 +47,8 @@ private extension ViewModel {
     }
 }
 
-extension ViewModel.InputsConnecter: ViewModelInputs {
+extension ViewModel.InputsConnector: ViewModelInputs {
 }
 
-extension ViewModel.OutputsConnecter: ViewModelOutputs {
+extension ViewModel.OutputsConnector: ViewModelOutputs {
 }
